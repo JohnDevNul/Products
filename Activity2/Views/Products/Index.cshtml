@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Activity2.Models.ProductModel>
+
+<a href="/products/create">Create new item</a>
+
+<div class="container d-flex flex-wrap">
+
+    @foreach (var item in Model)
+    {
+        <partial name="_productCard" model="item" />
+    }
+    </div>
+
