@@ -13,5 +13,9 @@
         <a href="/products/ShowDetails/@Model.Id" class="btn btn-primary">Details</a>
         <a href="/products/Edit/@Model.Id" class="btn btn-primary">Edit</a>
         <a href="/products/Delete/@Model.Id" class="btn btn-primary">Delete</a>
+        <!-- Button trigger modal -->
+        <button value="@Model.Id" class="btn btn-primary edit-product-button" data-toggle="modal" data-target="#editModal">
+            modal edit
+        </button>
     </div>
 </div>  

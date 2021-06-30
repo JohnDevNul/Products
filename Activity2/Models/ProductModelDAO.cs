@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Activity2.Models
 {
-    public class ProductModel
+    public class ProductModelDAO
     {
         [DisplayName("Id number")]
         public int Id { get; set; }

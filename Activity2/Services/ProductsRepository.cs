@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace Activity2.Services
 {
-    public class ProductsDAO : IProductDataService
+    public class ProductsRepository : IProductDataService
     {
         string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Test;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        public int Delete(ProductModel product)
+        public int Delete(ProductModelDAO product)
         {
             int newIdNumber = -1;
 
@@ -36,9 +36,9 @@ namespace Activity2.Services
             return newIdNumber;
         }
 
-        public List<ProductModel> GetAllProducts()
+        public List<ProductModelDAO> GetAllProducts()
         {
-            List<ProductModel> foundProducts = new List<ProductModel>();
+            List<ProductModelDAO> foundProducts = new List<ProductModelDAO>();
 
             string sqlStatement = "SELECT * FROM dbo.Products";
 
@@ -53,7 +53,7 @@ namespace Activity2.Services
                     SqlDataReader reader = command.ExecuteReader();
                     while(reader.Read())
                     {
-                        foundProducts.Add(new ProductModel { Id = (int)reader[0], Name = (string)reader[1], 
+                        foundProducts.Add(new ProductModelDAO { Id = (int)reader[0], Name = (string)reader[1], 
                             Price = (decimal)reader[2], Description = (string)reader[3] });
                     }
                 }catch(Exception ex)
@@ -64,9 +64,9 @@ namespace Activity2.Services
             return foundProducts;
         }
 
-        public ProductModel GetProductById(int id)
+        public ProductModelDAO GetProductById(int id)
         {
-            ProductModel foundProduct = null;
+            ProductModelDAO foundProduct = null;
 
             string sqlStatement = "SELECT * FROM dbo.Products WHERE Id = @Id";
 
@@ -82,7 +82,7 @@ namespace Activity2.Services
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        foundProduct = new ProductModel
+                        foundProduct = new ProductModelDAO
                         {
                             Id = (int)reader[0],
                             Name = (string)reader[1],
@@ -99,11 +99,11 @@ namespace Activity2.Services
             return foundProduct;
         }
 
-        public int Insert(ProductModel productModel)
+        public int Insert(ProductModelDAO2 productModel)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                string sqlQuery = "INSERT INTO dbo.Products Name, Price, Description VALUES (@Name, @Price, @Description)";
+                {
+                string sqlQuery = "INSERT INTO dbo.Products (Name, Price, Description) VALUES (@Name, @Price, @Description)";
 
                 SqlCommand command = new SqlCommand(sqlQuery, connection);
                 command.Parameters.Add("@Name", System.Data.SqlDbType.VarChar, 1000).Value = productModel.Name;
@@ -120,9 +120,9 @@ namespace Activity2.Services
             
         }
 
-        public List<ProductModel> SearchProducts(string searchTerm)
+        public List<ProductModelDAO> SearchProducts(string searchTerm)
         {
-            List<ProductModel> foundProducts = new List<ProductModel>();
+            List<ProductModelDAO> foundProducts = new List<ProductModelDAO>();
 
             string sqlStatement = "SELECT * FROM dbo.Products WHERE Name LIKE @Name";
 
@@ -138,7 +138,7 @@ namespace Activity2.Services
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        foundProducts.Add(new ProductModel
+                        foundProducts.Add(new ProductModelDAO
                         {
                             Id = (int)reader[0],
                             Name = (string)reader[1],
@@ -155,7 +155,7 @@ namespace Activity2.Services
             return foundProducts;
         }
 
-        public int Update(ProductModel product)
+        public int Update(ProductModelDAO product)
         {
             int newIdNumber = -1;
 

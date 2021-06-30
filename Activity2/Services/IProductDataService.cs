@@ -8,11 +8,11 @@ namespace Activity2.Services
 {
     interface IProductDataService
     {
-        List<ProductModel> GetAllProducts();
-        List<ProductModel> SearchProducts(string searchTerm);
-        ProductModel GetProductById(int id);
-        int Insert(ProductModel product);
-        int Delete(ProductModel product);
-        int Update(ProductModel product);
+        List<ProductModelDAO> GetAllProducts();
+        List<ProductModelDAO> SearchProducts(string searchTerm);
+        ProductModelDAO GetProductById(int id);
+        int Insert(ProductModelDAO product);
+        int Delete(ProductModelDAO product);
+        int Update(ProductModelDAO product);
     }
 }

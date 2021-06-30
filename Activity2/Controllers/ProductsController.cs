@@ -11,42 +11,52 @@ namespace Activity2.Controllers
 {
     public class ProductsController : Controller
     {
+        ProductsRepository repository;
+
+        public ProductsController()
+        {
+            repository = new ProductsRepository();
+        }
         public IActionResult Index()
         {
-            ProductsDAO products = new ProductsDAO();
-
-
-            return View(products.GetAllProducts());
+           return View(repository.GetAllProducts());
         }
 
         public IActionResult SearchResult(string searchTerm)
         {
-            ProductsDAO products = new ProductsDAO();
-
-            List<ProductModel> productList = products.SearchProducts(searchTerm);
+            List<ProductModelDAO> productList = repository.SearchProducts(searchTerm);
 
             return View("index", productList);
         }
 
         public IActionResult ShowDetails(int id)
         {
-            ProductsDAO products = new ProductsDAO();
-            ProductModel foundProduct = products.GetProductById(id);
+            ProductModelDAO foundProduct = repository.GetProductById(id);
             return View(foundProduct);
+        }
+
+        public IActionResult ShowOneProductJSON(int Id)
+        {
+
+            return Json(repository.GetProductById(Id));
         }
 
         public IActionResult Edit(int id)
         {
-            ProductsDAO products = new ProductsDAO();
-            ProductModel foundProduct = products.GetProductById(id);
+            ProductModelDAO foundProduct = repository.GetProductById(id);
             return View("ShowEdit", foundProduct);
         }
 
-        public IActionResult ProcessEdit(ProductModel product)
+        public IActionResult ProcessEdit(ProductModelDAO product)
         {
-            ProductsDAO products = new ProductsDAO();
-            products.Update(product);
-            return View("Index", products.GetAllProducts());
+            repository.Update(product);
+            return View("Index", repository.GetAllProducts());
+        }
+
+        public IActionResult ProcessEditReturnPartial(ProductModelDAO product)
+        {
+            repository.Update(product);
+            return PartialView("_productCard", product);    
         }
 
         public IActionResult Create()
@@ -54,18 +64,17 @@ namespace Activity2.Controllers
             return View("ProductForm");
         }
 
-        public IActionResult ProcessCreate(ProductModel productModel)
+        public IActionResult ProcessCreate(ProductModelDAO product)
         {
-            
-            return View("Details", productModel.Id);
+            repository.Insert(product);
+            return View("Index", repository.GetAllProducts());
         }
 
         public IActionResult Delete(int id)
         {
-            ProductsDAO products = new ProductsDAO();
-            ProductModel product = products.GetProductById(id);
-            products.Delete(product);
-            return View("Index", products.GetAllProducts());
+            ProductModelDAO product = repository.GetProductById(id);
+            repository.Delete(product);
+            return View("Index", repository.GetAllProducts());
         }
 
         public IActionResult SearchForm()

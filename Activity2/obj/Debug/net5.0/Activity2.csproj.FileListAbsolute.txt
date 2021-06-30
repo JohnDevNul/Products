@@ -130,3 +130,6 @@ C:\Users\pmgth\source\repos\Activity2\Activity2\obj\Debug\net5.0\Razor\Views\Pro
 C:\Users\pmgth\source\repos\Activity2\Activity2\obj\Debug\net5.0\Razor\Views\Products\_productCard.cshtml.g.cs
 C:\Users\pmgth\source\repos\Activity2\Activity2\obj\Debug\net5.0\Activity2.csproj.AssemblyReference.cache
 C:\Users\pmgth\source\repos\Activity2\Activity2\obj\Debug\net5.0\Razor\Views\Products\ProductForm.cshtml.g.cs
+C:\Users\pmgth\source\repos\Activity2\Activity2\bin\Debug\net5.0\System.Net.Http.Formatting.dll
+C:\Users\pmgth\source\repos\Activity2\Activity2\bin\Debug\net5.0\System.Web.Http.dll
+C:\Users\pmgth\source\repos\Activity2\Activity2\bin\Debug\net5.0\Newtonsoft.Json.Bson.dll
